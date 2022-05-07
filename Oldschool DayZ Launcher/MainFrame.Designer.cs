@@ -96,6 +96,7 @@ namespace Oldschool_DayZ_Launcher
             // 
             // metroButton1
             // 
+            this.metroButton1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.metroButton1.Location = new System.Drawing.Point(505, 518);
             this.metroButton1.Name = "metroButton1";
             this.metroButton1.Size = new System.Drawing.Size(121, 46);

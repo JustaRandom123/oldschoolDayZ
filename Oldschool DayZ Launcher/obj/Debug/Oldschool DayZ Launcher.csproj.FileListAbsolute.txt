@@ -36,3 +36,41 @@ C:\Users\Jonas\source\repos\Oldschool DayZ Launcher\Oldschool DayZ Launcher\bin\
 C:\Users\Jonas\source\repos\Oldschool DayZ Launcher\Oldschool DayZ Launcher\bin\Debug\System.Security.Principal.Windows.xml
 C:\Users\Jonas\source\repos\Oldschool DayZ Launcher\Oldschool DayZ Launcher\obj\Debug\Oldschool_DayZ_Launcher.MainFrame.resources
 C:\Users\Jonas\source\repos\Oldschool DayZ Launcher\Oldschool DayZ Launcher\obj\Debug\Oldschool DayZ Launcher.csproj.AssemblyReference.cache
+D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\bin\Debug\Oldschool DayZ Launcher.exe.config
+D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\bin\Debug\Oldschool DayZ Launcher.exe
+D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\bin\Debug\Oldschool DayZ Launcher.pdb
+D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\bin\Debug\MetroFramework.Design.dll
+D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\bin\Debug\MetroFramework.dll
+D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\bin\Debug\MetroFramework.Fonts.dll
+D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\bin\Debug\Microsoft.Win32.Registry.dll
+D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\bin\Debug\protobuf-net.Core.dll
+D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\bin\Debug\protobuf-net.dll
+D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\bin\Debug\SteamKit2.dll
+D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\bin\Debug\System.Buffers.dll
+D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\bin\Debug\System.Collections.Immutable.dll
+D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\bin\Debug\System.Memory.dll
+D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\bin\Debug\System.Numerics.Vectors.dll
+D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\bin\Debug\System.Security.AccessControl.dll
+D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\bin\Debug\System.Security.Principal.Windows.dll
+D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\bin\Debug\Microsoft.Win32.Registry.xml
+D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\bin\Debug\protobuf-net.xml
+D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\bin\Debug\protobuf-net.Core.xml
+D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\bin\Debug\SteamKit2.pdb
+D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\bin\Debug\SteamKit2.xml
+D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\bin\Debug\System.Buffers.xml
+D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\bin\Debug\System.Collections.Immutable.xml
+D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\bin\Debug\System.Memory.xml
+D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\bin\Debug\System.Numerics.Vectors.xml
+D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\bin\Debug\System.Security.AccessControl.xml
+D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\bin\Debug\System.Security.Principal.Windows.xml
+D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\obj\Debug\Oldschool DayZ Launcher.csproj.AssemblyReference.cache
+D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\obj\Debug\Oldschool_DayZ_Launcher.MainFrame.resources
+D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\obj\Debug\Oldschool_DayZ_Launcher.steamLoginFrame.resources
+D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\obj\Debug\Oldschool_DayZ_Launcher.Properties.Resources.resources
+D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\obj\Debug\Oldschool DayZ Launcher.csproj.GenerateResource.cache
+D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\obj\Debug\Oldschool DayZ Launcher.csproj.CoreCompileInputs.cache
+D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\obj\Debug\Oldschool DayZ Launcher.csproj.CopyComplete
+D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\obj\Debug\Oldschool DayZ Launcher.exe
+D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\obj\Debug\Oldschool DayZ Launcher.pdb
