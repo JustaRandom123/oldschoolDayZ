@@ -1,0 +1,38 @@
+C:\Users\Jonas\source\repos\Oldschool DayZ Launcher\Oldschool DayZ Launcher\bin\Debug\Oldschool DayZ Launcher.exe.config
+C:\Users\Jonas\source\repos\Oldschool DayZ Launcher\Oldschool DayZ Launcher\bin\Debug\Oldschool DayZ Launcher.exe
+C:\Users\Jonas\source\repos\Oldschool DayZ Launcher\Oldschool DayZ Launcher\bin\Debug\Oldschool DayZ Launcher.pdb
+C:\Users\Jonas\source\repos\Oldschool DayZ Launcher\Oldschool DayZ Launcher\bin\Debug\MetroFramework.Design.dll
+C:\Users\Jonas\source\repos\Oldschool DayZ Launcher\Oldschool DayZ Launcher\bin\Debug\MetroFramework.dll
+C:\Users\Jonas\source\repos\Oldschool DayZ Launcher\Oldschool DayZ Launcher\bin\Debug\MetroFramework.Fonts.dll
+C:\Users\Jonas\source\repos\Oldschool DayZ Launcher\Oldschool DayZ Launcher\obj\Debug\Oldschool_DayZ_Launcher.Properties.Resources.resources
+C:\Users\Jonas\source\repos\Oldschool DayZ Launcher\Oldschool DayZ Launcher\obj\Debug\Oldschool DayZ Launcher.csproj.GenerateResource.cache
+C:\Users\Jonas\source\repos\Oldschool DayZ Launcher\Oldschool DayZ Launcher\obj\Debug\Oldschool DayZ Launcher.csproj.CoreCompileInputs.cache
+C:\Users\Jonas\source\repos\Oldschool DayZ Launcher\Oldschool DayZ Launcher\obj\Debug\Oldschool DayZ Launcher.csproj.CopyComplete
+C:\Users\Jonas\source\repos\Oldschool DayZ Launcher\Oldschool DayZ Launcher\obj\Debug\Oldschool DayZ Launcher.exe
+C:\Users\Jonas\source\repos\Oldschool DayZ Launcher\Oldschool DayZ Launcher\obj\Debug\Oldschool DayZ Launcher.pdb
+C:\Users\Jonas\source\repos\Oldschool DayZ Launcher\Oldschool DayZ Launcher\obj\Debug\Oldschool_DayZ_Launcher.steamLoginFrame.resources
+C:\Users\Jonas\source\repos\Oldschool DayZ Launcher\Oldschool DayZ Launcher\bin\Debug\Microsoft.Win32.Registry.dll
+C:\Users\Jonas\source\repos\Oldschool DayZ Launcher\Oldschool DayZ Launcher\bin\Debug\protobuf-net.Core.dll
+C:\Users\Jonas\source\repos\Oldschool DayZ Launcher\Oldschool DayZ Launcher\bin\Debug\protobuf-net.dll
+C:\Users\Jonas\source\repos\Oldschool DayZ Launcher\Oldschool DayZ Launcher\bin\Debug\SteamKit2.dll
+C:\Users\Jonas\source\repos\Oldschool DayZ Launcher\Oldschool DayZ Launcher\bin\Debug\System.Buffers.dll
+C:\Users\Jonas\source\repos\Oldschool DayZ Launcher\Oldschool DayZ Launcher\bin\Debug\System.Collections.Immutable.dll
+C:\Users\Jonas\source\repos\Oldschool DayZ Launcher\Oldschool DayZ Launcher\bin\Debug\System.Memory.dll
+C:\Users\Jonas\source\repos\Oldschool DayZ Launcher\Oldschool DayZ Launcher\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\Jonas\source\repos\Oldschool DayZ Launcher\Oldschool DayZ Launcher\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\Jonas\source\repos\Oldschool DayZ Launcher\Oldschool DayZ Launcher\bin\Debug\System.Security.AccessControl.dll
+C:\Users\Jonas\source\repos\Oldschool DayZ Launcher\Oldschool DayZ Launcher\bin\Debug\System.Security.Principal.Windows.dll
+C:\Users\Jonas\source\repos\Oldschool DayZ Launcher\Oldschool DayZ Launcher\bin\Debug\Microsoft.Win32.Registry.xml
+C:\Users\Jonas\source\repos\Oldschool DayZ Launcher\Oldschool DayZ Launcher\bin\Debug\protobuf-net.xml
+C:\Users\Jonas\source\repos\Oldschool DayZ Launcher\Oldschool DayZ Launcher\bin\Debug\protobuf-net.Core.xml
+C:\Users\Jonas\source\repos\Oldschool DayZ Launcher\Oldschool DayZ Launcher\bin\Debug\SteamKit2.pdb
+C:\Users\Jonas\source\repos\Oldschool DayZ Launcher\Oldschool DayZ Launcher\bin\Debug\SteamKit2.xml
+C:\Users\Jonas\source\repos\Oldschool DayZ Launcher\Oldschool DayZ Launcher\bin\Debug\System.Buffers.xml
+C:\Users\Jonas\source\repos\Oldschool DayZ Launcher\Oldschool DayZ Launcher\bin\Debug\System.Collections.Immutable.xml
+C:\Users\Jonas\source\repos\Oldschool DayZ Launcher\Oldschool DayZ Launcher\bin\Debug\System.Memory.xml
+C:\Users\Jonas\source\repos\Oldschool DayZ Launcher\Oldschool DayZ Launcher\bin\Debug\System.Numerics.Vectors.xml
+C:\Users\Jonas\source\repos\Oldschool DayZ Launcher\Oldschool DayZ Launcher\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\Jonas\source\repos\Oldschool DayZ Launcher\Oldschool DayZ Launcher\bin\Debug\System.Security.AccessControl.xml
+C:\Users\Jonas\source\repos\Oldschool DayZ Launcher\Oldschool DayZ Launcher\bin\Debug\System.Security.Principal.Windows.xml
+C:\Users\Jonas\source\repos\Oldschool DayZ Launcher\Oldschool DayZ Launcher\obj\Debug\Oldschool_DayZ_Launcher.MainFrame.resources
+C:\Users\Jonas\source\repos\Oldschool DayZ Launcher\Oldschool DayZ Launcher\obj\Debug\Oldschool DayZ Launcher.csproj.AssemblyReference.cache

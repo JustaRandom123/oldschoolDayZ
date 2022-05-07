@@ -1,0 +1,4 @@
+Addons
+BattlEye
+dll
+dta
