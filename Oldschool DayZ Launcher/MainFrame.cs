@@ -13,6 +13,9 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using MetroFramework.Controls;
 
 namespace Oldschool_DayZ_Launcher
 {
@@ -39,8 +42,24 @@ namespace Oldschool_DayZ_Launcher
 
         private void MainFrame_Load(object sender, EventArgs e)
         {
-            gettingsFiles();
+            metroListView1.MouseClick += listView1_MouseClick;
+            gettingsFiles();          
         }
+
+        private void listView1_MouseClick(object sender, MouseEventArgs e)
+        {
+            for (int i = 0; i < metroListView1.Items.Count; i++)
+            {
+                ListViewItem item = metroListView1.Items[i];
+                Rectangle itemRect = item.GetBounds(ItemBoundsPortion.Label);
+                if (itemRect.Contains(e.Location))
+                {
+                    startGame(item.Name);                  
+                    break;
+                }
+            }
+        }
+       
 
         private void gettingsFiles()
         {
@@ -212,11 +231,21 @@ namespace Oldschool_DayZ_Launcher
             {
         
                 metroLabel1.Text = "Download Finished!";
-                metroButton1.Visible = true;
+                metroListView1.Visible = true;
                 metroLabel2.Visible = false;
                 metroLabel1.Visible = false;
                 metroLabel3.Visible = false;
                 metroProgressBar1.Visible = false;
+                serverLoader();
+
+                metroProgressBar1.Value = 100;
+                filesToDownload.Clear();
+                missingFiles.Clear();
+                existingFiles.Clear();
+                bytesOfFiles.Clear();
+                needToDownload.Clear();
+                folderPath.Clear();
+                missingFolders.Clear();
             }
             else
             {
@@ -236,13 +265,14 @@ namespace Oldschool_DayZ_Launcher
             }
             else
             {
-                metroButton1.Visible = true;
+                metroListView1.Visible = true;
                 metroLabel1.Text = "Download finished!";
                 metroLabel1.Visible = false;
                 metroLabel2.Visible = false;
                 metroLabel3.Visible = false;
                 metroProgressBar1.Visible = false;
-                
+                serverLoader();
+
 
                 metroProgressBar1.Value = 100;            
                 filesToDownload.Clear();
@@ -278,12 +308,33 @@ namespace Oldschool_DayZ_Launcher
             //}
         }
 
-        private void metroButton1_Click(object sender, EventArgs e)
+       
+
+
+        private void startGame (string ip)
         {
             if (File.Exists(Application.StartupPath + "\\DayZ_x64.exe"))
             {
-                Process.Start(Application.StartupPath + "\\DayZ_x64.exe", "-connect 158.69.22.190:2302");
+                Process.Start(Application.StartupPath + "\\DayZ_x64.exe", "-connect " + ip);
             }
         }
+
+
+        private void serverLoader()
+        {
+            var serverlist = JToken.Parse(File.ReadAllText(Application.StartupPath + "\\servers.json"));
+            foreach (var table in serverlist)
+            {               
+                ListViewItem item = new ListViewItem(table["servername"].ToString());
+              
+           
+                item.SubItems.Add(table["players"].ToString());
+                item.SubItems.Add(table["map"].ToString());
+                item.SubItems.Add(table["version"].ToString());
+                item.Name = table["ip"].ToString() + ":" + table["port"].ToString();
+               
+                metroListView1.Items.Add(item);
+            }
+        }    
     }
 }

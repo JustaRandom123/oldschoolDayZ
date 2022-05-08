@@ -65,7 +65,6 @@ D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\bin\Debug\System.Numerics.Vector
 D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\bin\Debug\System.Security.AccessControl.xml
 D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\bin\Debug\System.Security.Principal.Windows.xml
-D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\obj\Debug\Oldschool DayZ Launcher.csproj.AssemblyReference.cache
 D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\obj\Debug\Oldschool_DayZ_Launcher.MainFrame.resources
 D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\obj\Debug\Oldschool_DayZ_Launcher.steamLoginFrame.resources
 D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\obj\Debug\Oldschool_DayZ_Launcher.Properties.Resources.resources
@@ -74,3 +73,7 @@ D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\obj\Debug\Oldschool DayZ Launche
 D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\obj\Debug\Oldschool DayZ Launcher.csproj.CopyComplete
 D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\obj\Debug\Oldschool DayZ Launcher.exe
 D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\obj\Debug\Oldschool DayZ Launcher.pdb
+D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\obj\Debug\Oldschool DayZ Launcher.csproj.AssemblyReference.cache
+D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\obj\Debug\Oldschool DayZ Launcher.csproj.SuggestedBindingRedirects.cache
+D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\bin\Debug\Newtonsoft.Json.dll
+D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\bin\Debug\Newtonsoft.Json.xml
