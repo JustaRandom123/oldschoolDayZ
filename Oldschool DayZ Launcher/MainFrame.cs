@@ -42,7 +42,16 @@ namespace Oldschool_DayZ_Launcher
 
         private void MainFrame_Load(object sender, EventArgs e)
         {
-            metroListView1.MouseClick += listView1_MouseClick;
+            if (Settings.Default.steamToken == "")
+            {              
+                var content = Interaction.InputBox("Go to this site: https://steamcommunity.com/dev/apikey and copy/paste your steam token down below", "Steam Token", "Enter your token here", -1, -1);               
+                if (content != null)
+                {             
+                    Settings.Default.steamToken = content;
+                    Settings.Default.Save();                 
+                }             
+            }     
+            metroListView1.MouseClick += listView1_MouseClick;      
             gettingsFiles();          
         }
 
@@ -237,6 +246,8 @@ namespace Oldschool_DayZ_Launcher
                 metroLabel3.Visible = false;
                 metroProgressBar1.Visible = false;
                 serverLoader();
+                metroButton1.Visible = true;
+
 
                 metroProgressBar1.Value = 100;
                 filesToDownload.Clear();
@@ -272,6 +283,7 @@ namespace Oldschool_DayZ_Launcher
                 metroLabel3.Visible = false;
                 metroProgressBar1.Visible = false;
                 serverLoader();
+                metroButton1.Visible = true;
 
 
                 metroProgressBar1.Value = 100;            
@@ -322,19 +334,24 @@ namespace Oldschool_DayZ_Launcher
 
         private void serverLoader()
         {
-            var serverlist = JToken.Parse(File.ReadAllText(Application.StartupPath + "\\servers.json"));
-            foreach (var table in serverlist)
-            {               
-                ListViewItem item = new ListViewItem(table["servername"].ToString());
-              
-           
+            string response = wclient.DownloadString("https://api.steampowered.com/IGameServersService/GetServerList/v1/?key=" + Settings.Default.steamToken  + "&filter=addr\\158.69.22.190");         
+            var serverlist = JObject.Parse(response);
+            
+            foreach (var table in serverlist["response"]["servers"])
+            {             
+                ListViewItem item = new ListViewItem(table["name"].ToString());
                 item.SubItems.Add(table["players"].ToString());
                 item.SubItems.Add(table["map"].ToString());
                 item.SubItems.Add(table["version"].ToString());
-                item.Name = table["ip"].ToString() + ":" + table["port"].ToString();
-               
+                item.Name = table["addr"].ToString();
                 metroListView1.Items.Add(item);
             }
-        }    
+        }
+
+        private void metroButton1_Click(object sender, EventArgs e)
+        {
+            metroListView1.Items.Clear();
+            serverLoader();
+        }
     }
 }

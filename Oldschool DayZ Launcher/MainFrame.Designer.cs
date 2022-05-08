@@ -41,6 +41,7 @@ namespace Oldschool_DayZ_Launcher
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.metroButton1 = new MetroFramework.Controls.MetroButton();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -154,11 +155,25 @@ namespace Oldschool_DayZ_Launcher
             this.columnHeader5.Text = "";
             this.columnHeader5.Width = 482;
             // 
+            // metroButton1
+            // 
+            this.metroButton1.Location = new System.Drawing.Point(1074, 25);
+            this.metroButton1.Name = "metroButton1";
+            this.metroButton1.Size = new System.Drawing.Size(75, 23);
+            this.metroButton1.Style = MetroFramework.MetroColorStyle.Silver;
+            this.metroButton1.TabIndex = 7;
+            this.metroButton1.Text = "Refresh";
+            this.metroButton1.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.metroButton1.UseSelectable = true;
+            this.metroButton1.Visible = false;
+            this.metroButton1.Click += new System.EventHandler(this.metroButton1_Click);
+            // 
             // MainFrame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1172, 653);
+            this.Controls.Add(this.metroButton1);
             this.Controls.Add(this.metroListView1);
             this.Controls.Add(this.metroLabel3);
             this.Controls.Add(this.pictureBox1);
@@ -190,5 +205,6 @@ namespace Oldschool_DayZ_Launcher
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.ColumnHeader columnHeader5;
+        private MetroFramework.Controls.MetroButton metroButton1;
     }
 }

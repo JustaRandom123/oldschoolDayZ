@@ -14,5 +14,8 @@
     <Setting Name="serverURLdownload" Type="System.String" Scope="Application">
       <Value Profile="(Default)">http://185.223.31.43/DayZ/</Value>
     </Setting>
+    <Setting Name="steamToken" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

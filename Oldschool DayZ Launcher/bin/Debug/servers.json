@@ -1,10 +1,45 @@
-[
-   {
-      "servername":"Oldschool DayZ",
-      "ip":"158.69.22.190",
-      "port":"2302",
-      "players":"0",
-      "map":"Chernarus",
-      "version":"0.62"
+{
+   "response":{
+      "servers":[
+         {
+            "addr":"158.69.22.190:2703",
+            "gameport":2702,
+            "steamid":"90158875179511813",
+            "name":"OLD SCHOOL DAYZ - OLD features in NEW DayZ",
+            "appid":221100,
+            "gamedir":"dayz",
+            "version":"1.17.154754",
+            "product":"dayz",
+            "region":-1,
+            "players":0,
+            "max_players":60,
+            "bots":0,
+            "map":"chernarusplus",
+            "secure":true,
+            "dedicated":true,
+            "os":"w",
+            "gametype":"battleye,no3rd,external,privHive,shard,lqs0,etm4.000000,entm12.000000,mod,06:43"
+         },
+         {
+            "addr":"158.69.22.190:28600",
+            "gameport":2302,
+            "steamid":"90158878264556549",
+            "name":"RETURN TO 0.62 - Old School DayZ | Hosted by DayZVPP.com",
+            "appid":221100,
+            "gamedir":"dayz",
+            "version":"0.62.140099",
+            "product":"dayz",
+            "region":-1,
+            "players":0,
+            "max_players":60,
+            "bots":0,
+            "map":"dayzOffline",
+            "secure":true,
+            "dedicated":true,
+            "os":"w",
+            "gametype":"battleye,external,shard100,lqs0,etm6.000000,21:50"
+         }
+      ]
    }
-]
+}
+
