@@ -70,5 +70,14 @@ namespace Oldschool_DayZ_Launcher.Properties {
                 this["steamToken"] = value;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1.1")]
+        public string version {
+            get {
+                return ((string)(this["version"]));
+            }
+        }
     }
 }

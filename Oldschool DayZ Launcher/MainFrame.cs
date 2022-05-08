@@ -42,6 +42,16 @@ namespace Oldschool_DayZ_Launcher
 
         private void MainFrame_Load(object sender, EventArgs e)
         {
+            if (Settings.Default.version != wclient.DownloadString("http://185.223.31.43/Launcher/version"))
+            {
+                MessageBox.Show("New update available!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                Application.Exit();
+                Process.Start(Application.StartupPath + "\\updater.exe");
+                return;
+            }
+
+
+
             if (Settings.Default.steamToken == "")
             {              
                 var content = Interaction.InputBox("Go to this site: https://steamcommunity.com/dev/apikey and copy/paste your steam token down below", "Steam Token", "Enter your token here", -1, -1);               
@@ -53,9 +63,9 @@ namespace Oldschool_DayZ_Launcher
             }     
             listView1.MouseClick += listView1_MouseClick;
 
-            //listView1.Visible = true;
-           // serverLoader();
-            gettingsFiles();          
+            listView1.Visible = true;
+            serverLoader();
+           // gettingsFiles();          
         }
 
         private void listView1_MouseClick(object sender, MouseEventArgs e)
@@ -72,7 +82,7 @@ namespace Oldschool_DayZ_Launcher
                         break;
                     }
                     else
-                    {
+                    {                     
                         startGame(item.Name);
                         break;
                     }                  
@@ -353,7 +363,7 @@ namespace Oldschool_DayZ_Launcher
 
             foreach (var table in serverlist["response"]["servers"])
             {
-                if (table["addr"].ToString() == addr)
+                if (table["addr"].ToString().Split(Convert.ToChar(":"))[0] + ":" + table["gameport"].ToString() == addr)
                 {
                     version = table["version"].ToString();
                     break;
@@ -373,7 +383,7 @@ namespace Oldschool_DayZ_Launcher
                 item.SubItems.Add(table["players"].ToString() + " / " + table["max_players"].ToString());
                 item.SubItems.Add(table["map"].ToString());
                 item.SubItems.Add(table["version"].ToString());
-                item.Name = table["addr"].ToString();       
+                item.Name = table["addr"].ToString().Split(Convert.ToChar(":"))[0] + ":" + table["gameport"].ToString();       
                 listView1.Items.Add(item);
             }
         }
