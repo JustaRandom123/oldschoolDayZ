@@ -63,9 +63,9 @@ namespace Oldschool_DayZ_Launcher
             }     
             listView1.MouseClick += listView1_MouseClick;
 
-            listView1.Visible = true;
-            serverLoader();
-           // gettingsFiles();          
+           // listView1.Visible = true;
+          //  serverLoader();
+             gettingsFiles();          
         }
 
         private void listView1_MouseClick(object sender, MouseEventArgs e)
@@ -82,7 +82,7 @@ namespace Oldschool_DayZ_Launcher
                         break;
                     }
                     else
-                    {                     
+                    {                      
                         startGame(item.Name);
                         break;
                     }                  
@@ -348,9 +348,12 @@ namespace Oldschool_DayZ_Launcher
 
         private void startGame (string ip)
         {
+            string startParameter = "-connect #ip#";
+
             if (File.Exists(Application.StartupPath + "\\DayZ_x64.exe"))
             {
-                Process.Start(Application.StartupPath + "\\DayZ_x64.exe", "-connect " + ip);
+                startParameter = startParameter.Replace("#ip#", ip);
+                Process.Start(Application.StartupPath + "\\DayZ_x64.exe", startParameter);
             }
         }
 
