@@ -51,20 +51,31 @@ namespace Oldschool_DayZ_Launcher
                     Settings.Default.Save();                 
                 }             
             }     
-            metroListView1.MouseClick += listView1_MouseClick;      
+            listView1.MouseClick += listView1_MouseClick;
+
+            //listView1.Visible = true;
+           // serverLoader();
             gettingsFiles();          
         }
 
         private void listView1_MouseClick(object sender, MouseEventArgs e)
         {
-            for (int i = 0; i < metroListView1.Items.Count; i++)
+            for (int i = 0; i < listView1.Items.Count; i++)
             {
-                ListViewItem item = metroListView1.Items[i];
+                ListViewItem item = listView1.Items[i];
                 Rectangle itemRect = item.GetBounds(ItemBoundsPortion.Label);
                 if (itemRect.Contains(e.Location))
                 {
-                    startGame(item.Name);                  
-                    break;
+                    if (getVersionByAddr(item.Name) != "0.62.140099")
+                    {               
+                        MessageBox.Show("This version is not supported!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        break;
+                    }
+                    else
+                    {
+                        startGame(item.Name);
+                        break;
+                    }                  
                 }
             }
         }
@@ -240,11 +251,12 @@ namespace Oldschool_DayZ_Launcher
             {
         
                 metroLabel1.Text = "Download Finished!";
-                metroListView1.Visible = true;
+                listView1.Visible = true;
                 metroLabel2.Visible = false;
                 metroLabel1.Visible = false;
                 metroLabel3.Visible = false;
                 metroProgressBar1.Visible = false;
+                metroLabel4.Visible = false;
                 serverLoader();
                 metroButton1.Visible = true;
 
@@ -276,12 +288,13 @@ namespace Oldschool_DayZ_Launcher
             }
             else
             {
-                metroListView1.Visible = true;
+                listView1.Visible = true;
                 metroLabel1.Text = "Download finished!";
                 metroLabel1.Visible = false;
                 metroLabel2.Visible = false;
                 metroLabel3.Visible = false;
                 metroProgressBar1.Visible = false;
+                metroLabel4.Visible = false;
                 serverLoader();
                 metroButton1.Visible = true;
 
@@ -300,24 +313,24 @@ namespace Oldschool_DayZ_Launcher
         private void wc_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
             metroProgressBar1.Value = e.ProgressPercentage;
-            //long totalbytes = e.TotalBytesToReceive / 1024 / 1024;
-            //long totalbytesKB = e.TotalBytesToReceive / 1024;
-            //long bytes = e.BytesReceived / 1024 / 1024;
-            //long gbbytes = e.BytesReceived / 1024 / 1024 / 1024;
-            //long totalbytesGB = e.TotalBytesToReceive / 1024 / 1024 / 1024;
-            //long bytesKB = e.BytesReceived / 1024;
-            //if (e.BytesReceived >= 999)
-            //{
-            //    label5.Text = bytes.ToString() + " / " + totalbytes.ToString() + " MB ";
-            //}
-            //else if (e.BytesReceived < 999)
-            //{
-            //    label5.Text = bytesKB.ToString() + " / " + totalbytesKB.ToString() + " KB ";
-            //}
-            //else if (e.BytesReceived >= 9999)
-            //{
-            //    label5.Text = gbbytes.ToString() + " / " + totalbytesGB.ToString() + " GB ";
-            //}
+            long totalbytes = e.TotalBytesToReceive / 1024 / 1024;
+            long totalbytesKB = e.TotalBytesToReceive / 1024;
+            long bytes = e.BytesReceived / 1024 / 1024;
+            long gbbytes = e.BytesReceived / 1024 / 1024 / 1024;
+            long totalbytesGB = e.TotalBytesToReceive / 1024 / 1024 / 1024;
+            long bytesKB = e.BytesReceived / 1024;
+            if (e.BytesReceived >= 999)
+            {
+                metroLabel4.Text = bytes.ToString() + " / " + totalbytes.ToString() + " MB ";
+            }
+            else if (e.BytesReceived < 999)
+            {
+                metroLabel4.Text = bytesKB.ToString() + " / " + totalbytesKB.ToString() + " KB ";
+            }
+            else if (e.BytesReceived >= 9999)
+            {
+                metroLabel4.Text = gbbytes.ToString() + " / " + totalbytesGB.ToString() + " GB ";
+            }
         }
 
        
@@ -332,6 +345,23 @@ namespace Oldschool_DayZ_Launcher
         }
 
 
+        private string getVersionByAddr(string addr)
+        {
+            string version = "";
+            string response = wclient.DownloadString("https://api.steampowered.com/IGameServersService/GetServerList/v1/?key=" + Settings.Default.steamToken + "&filter=addr\\158.69.22.190");
+            var serverlist = JObject.Parse(response);
+
+            foreach (var table in serverlist["response"]["servers"])
+            {
+                if (table["addr"].ToString() == addr)
+                {
+                    version = table["version"].ToString();
+                    break;
+                }
+            }
+            return version;
+        }
+
         private void serverLoader()
         {
             string response = wclient.DownloadString("https://api.steampowered.com/IGameServersService/GetServerList/v1/?key=" + Settings.Default.steamToken  + "&filter=addr\\158.69.22.190");         
@@ -340,18 +370,23 @@ namespace Oldschool_DayZ_Launcher
             foreach (var table in serverlist["response"]["servers"])
             {             
                 ListViewItem item = new ListViewItem(table["name"].ToString());
-                item.SubItems.Add(table["players"].ToString());
+                item.SubItems.Add(table["players"].ToString() + " / " + table["max_players"].ToString());
                 item.SubItems.Add(table["map"].ToString());
                 item.SubItems.Add(table["version"].ToString());
-                item.Name = table["addr"].ToString();
-                metroListView1.Items.Add(item);
+                item.Name = table["addr"].ToString();       
+                listView1.Items.Add(item);
             }
         }
 
         private void metroButton1_Click(object sender, EventArgs e)
         {
-            metroListView1.Items.Clear();
+            listView1.Items.Clear();
             serverLoader();
+        }
+
+        private void metroListView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

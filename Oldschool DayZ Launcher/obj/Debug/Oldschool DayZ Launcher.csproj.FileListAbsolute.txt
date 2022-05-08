@@ -45,7 +45,6 @@ D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\bin\Debug\MetroFramework.Fonts.d
 D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\bin\Debug\Microsoft.Win32.Registry.dll
 D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\bin\Debug\protobuf-net.Core.dll
 D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\bin\Debug\protobuf-net.dll
-D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\bin\Debug\SteamKit2.dll
 D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\bin\Debug\System.Buffers.dll
 D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\bin\Debug\System.Collections.Immutable.dll
 D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\bin\Debug\System.Memory.dll
@@ -56,8 +55,6 @@ D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\bin\Debug\System.Security.Princi
 D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\bin\Debug\Microsoft.Win32.Registry.xml
 D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\bin\Debug\protobuf-net.xml
 D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\bin\Debug\protobuf-net.Core.xml
-D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\bin\Debug\SteamKit2.pdb
-D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\bin\Debug\SteamKit2.xml
 D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\bin\Debug\System.Buffers.xml
 D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\bin\Debug\System.Collections.Immutable.xml
 D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\bin\Debug\System.Memory.xml

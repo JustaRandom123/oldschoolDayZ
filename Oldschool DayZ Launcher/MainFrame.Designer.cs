@@ -35,13 +35,13 @@ namespace Oldschool_DayZ_Launcher
             this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
-            this.metroListView1 = new MetroFramework.Controls.MetroListView();
+            this.metroButton1 = new MetroFramework.Controls.MetroButton();
+            this.listView1 = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.metroButton1 = new MetroFramework.Controls.MetroButton();
+            this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -92,68 +92,13 @@ namespace Oldschool_DayZ_Launcher
             // 
             this.metroLabel3.AutoSize = true;
             this.metroLabel3.FontWeight = MetroFramework.MetroLabelWeight.Bold;
-            this.metroLabel3.Location = new System.Drawing.Point(1107, 606);
+            this.metroLabel3.Location = new System.Drawing.Point(1085, 606);
             this.metroLabel3.Name = "metroLabel3";
             this.metroLabel3.Size = new System.Drawing.Size(42, 19);
             this.metroLabel3.Style = MetroFramework.MetroColorStyle.Silver;
             this.metroLabel3.TabIndex = 4;
             this.metroLabel3.Text = "label";
             this.metroLabel3.Theme = MetroFramework.MetroThemeStyle.Dark;
-            // 
-            // metroListView1
-            // 
-            this.metroListView1.AutoArrange = false;
-            this.metroListView1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            this.metroListView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.metroListView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1,
-            this.columnHeader2,
-            this.columnHeader3,
-            this.columnHeader4,
-            this.columnHeader5});
-            this.metroListView1.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.metroListView1.ForeColor = System.Drawing.Color.Black;
-            this.metroListView1.FullRowSelect = true;
-            this.metroListView1.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.metroListView1.Location = new System.Drawing.Point(17, 54);
-            this.metroListView1.MultiSelect = false;
-            this.metroListView1.Name = "metroListView1";
-            this.metroListView1.OwnerDraw = true;
-            this.metroListView1.Size = new System.Drawing.Size(1132, 559);
-            this.metroListView1.Style = MetroFramework.MetroColorStyle.Silver;
-            this.metroListView1.TabIndex = 6;
-            this.metroListView1.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.metroListView1.UseCompatibleStateImageBehavior = false;
-            this.metroListView1.UseCustomBackColor = true;
-            this.metroListView1.UseCustomForeColor = true;
-            this.metroListView1.UseSelectable = true;
-            this.metroListView1.View = System.Windows.Forms.View.Details;
-            this.metroListView1.Visible = false;
-            // 
-            // columnHeader1
-            // 
-            this.columnHeader1.Text = "Servername";
-            this.columnHeader1.Width = 350;
-            // 
-            // columnHeader2
-            // 
-            this.columnHeader2.Text = "Players";
-            this.columnHeader2.Width = 100;
-            // 
-            // columnHeader3
-            // 
-            this.columnHeader3.Text = "Map";
-            this.columnHeader3.Width = 100;
-            // 
-            // columnHeader4
-            // 
-            this.columnHeader4.Text = "Version";
-            this.columnHeader4.Width = 100;
-            // 
-            // columnHeader5
-            // 
-            this.columnHeader5.Text = "";
-            this.columnHeader5.Width = 482;
             // 
             // metroButton1
             // 
@@ -168,18 +113,73 @@ namespace Oldschool_DayZ_Launcher
             this.metroButton1.Visible = false;
             this.metroButton1.Click += new System.EventHandler(this.metroButton1_Click);
             // 
+            // listView1
+            // 
+            this.listView1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            this.listView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2,
+            this.columnHeader3,
+            this.columnHeader4});
+            this.listView1.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listView1.ForeColor = System.Drawing.Color.White;
+            this.listView1.FullRowSelect = true;
+            this.listView1.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.listView1.HideSelection = false;
+            this.listView1.Location = new System.Drawing.Point(23, 63);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(1126, 575);
+            this.listView1.TabIndex = 8;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.View = System.Windows.Forms.View.Details;
+            this.listView1.Visible = false;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Servername";
+            this.columnHeader1.Width = 500;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Players";
+            this.columnHeader2.Width = 100;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "Map";
+            this.columnHeader3.Width = 250;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "Version";
+            this.columnHeader4.Width = 150;
+            // 
+            // metroLabel4
+            // 
+            this.metroLabel4.AutoSize = true;
+            this.metroLabel4.FontWeight = MetroFramework.MetroLabelWeight.Bold;
+            this.metroLabel4.Location = new System.Drawing.Point(1085, 578);
+            this.metroLabel4.Name = "metroLabel4";
+            this.metroLabel4.Size = new System.Drawing.Size(42, 19);
+            this.metroLabel4.Style = MetroFramework.MetroColorStyle.Silver;
+            this.metroLabel4.TabIndex = 9;
+            this.metroLabel4.Text = "label";
+            this.metroLabel4.Theme = MetroFramework.MetroThemeStyle.Dark;
+            // 
             // MainFrame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1172, 653);
+            this.Controls.Add(this.listView1);
             this.Controls.Add(this.metroButton1);
-            this.Controls.Add(this.metroListView1);
             this.Controls.Add(this.metroLabel3);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.metroLabel2);
             this.Controls.Add(this.metroLabel1);
             this.Controls.Add(this.metroProgressBar1);
+            this.Controls.Add(this.metroLabel4);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainFrame";
             this.Style = MetroFramework.MetroColorStyle.Silver;
@@ -199,12 +199,12 @@ namespace Oldschool_DayZ_Launcher
         public MetroFramework.Controls.MetroLabel metroLabel2;
         private System.Windows.Forms.PictureBox pictureBox1;
         public MetroFramework.Controls.MetroLabel metroLabel3;
-        private MetroFramework.Controls.MetroListView metroListView1;
+        private MetroFramework.Controls.MetroButton metroButton1;
+        private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.ColumnHeader columnHeader4;
-        private System.Windows.Forms.ColumnHeader columnHeader5;
-        private MetroFramework.Controls.MetroButton metroButton1;
+        public MetroFramework.Controls.MetroLabel metroLabel4;
     }
 }
