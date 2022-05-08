@@ -348,6 +348,7 @@ namespace Oldschool_DayZ_Launcher
 
         private void startGame (string ip)
         {
+            stopGame();
             string startParameter = "-connect #ip#";
 
             if (File.Exists(Application.StartupPath + "\\DayZ_x64.exe"))
@@ -400,6 +401,15 @@ namespace Oldschool_DayZ_Launcher
         private void metroListView1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void stopGame()
+        {
+            Process[] prozess = Process.GetProcessesByName("DayZ_x64");
+            foreach (Process pr in prozess)
+            {
+                pr.Kill();
+            }
         }
     }
 }
