@@ -21,6 +21,7 @@ namespace Oldschool_DayZ_Launcher
 {
     public partial class MainFrame : MetroFramework.Forms.MetroForm
     {
+        public static string[] ipList = { "158.69.22.190", "185.223.31.43" };
         public static ArrayList filesToDownload = new ArrayList();
         public static ArrayList missingFiles = new ArrayList();
         public static ArrayList existingFiles = new ArrayList();
@@ -361,35 +362,50 @@ namespace Oldschool_DayZ_Launcher
 
         private string getVersionByAddr(string addr)
         {
-            string version = "";
-            string response = wclient.DownloadString("https://api.steampowered.com/IGameServersService/GetServerList/v1/?key=" + Settings.Default.steamToken + "&filter=addr\\158.69.22.190");
-            var serverlist = JObject.Parse(response);
+            string version = "";                 
+            string response = wclient.DownloadString("https://api.steampowered.com/IGameServersService/GetServerList/v1/?key=" + Settings.Default.steamToken + "&filter=addr\\" + addr.Split(Convert.ToChar(":"))[0]);
 
-            foreach (var table in serverlist["response"]["servers"])
+            if (response != "{'response':{}}")
             {
-                if (table["addr"].ToString().Split(Convert.ToChar(":"))[0] + ":" + table["gameport"].ToString() == addr)
+                var serverlist = JObject.Parse(response);
+
+                foreach (var table in serverlist["response"]["servers"])
                 {
-                    version = table["version"].ToString();
-                    break;
+                    if (table["addr"].ToString().Split(Convert.ToChar(":"))[0] + ":" + table["gameport"].ToString() == addr)
+                    {
+                        version = table["version"].ToString();
+                        break;
+                    }
                 }
-            }
+            }                           
             return version;
         }
 
         private void serverLoader()
         {
-            string response = wclient.DownloadString("https://api.steampowered.com/IGameServersService/GetServerList/v1/?key=" + Settings.Default.steamToken  + "&filter=addr\\158.69.22.190");         
-            var serverlist = JObject.Parse(response);
-            
-            foreach (var table in serverlist["response"]["servers"])
-            {             
-                ListViewItem item = new ListViewItem(table["name"].ToString());
-                item.SubItems.Add(table["players"].ToString() + " / " + table["max_players"].ToString());
-                item.SubItems.Add(table["map"].ToString());
-                item.SubItems.Add(table["version"].ToString());
-                item.Name = table["addr"].ToString().Split(Convert.ToChar(":"))[0] + ":" + table["gameport"].ToString();       
-                listView1.Items.Add(item);
-            }
+            foreach (string ip in ipList)
+            {
+                string response = wclient.DownloadString("https://api.steampowered.com/IGameServersService/GetServerList/v1/?key=" + Settings.Default.steamToken + "&filter=addr\\" + ip);
+
+               
+                    var serverlist = JObject.Parse(response);
+
+                if (serverlist["response"].ToString() != "{}")
+                    {
+
+
+
+                    foreach (var table in serverlist["response"]["servers"])
+                    {
+                        ListViewItem item = new ListViewItem(table["name"].ToString());
+                        item.SubItems.Add(table["players"].ToString() + " / " + table["max_players"].ToString());
+                        item.SubItems.Add(table["map"].ToString());
+                        item.SubItems.Add(table["version"].ToString());
+                        item.Name = table["addr"].ToString().Split(Convert.ToChar(":"))[0] + ":" + table["gameport"].ToString();
+                        listView1.Items.Add(item);
+                    }
+                }               
+            }           
         }
 
         private void metroButton1_Click(object sender, EventArgs e)
@@ -410,6 +426,11 @@ namespace Oldschool_DayZ_Launcher
             {
                 pr.Kill();
             }
+        }
+
+        private void metroButton2_Click(object sender, EventArgs e)
+        {
+            startGame("185.223.31.43:2302");
         }
     }
 }

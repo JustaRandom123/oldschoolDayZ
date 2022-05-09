@@ -73,7 +73,7 @@ namespace Oldschool_DayZ_Launcher.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1.3")]
+        [global::System.Configuration.DefaultSettingValueAttribute("1.5")]
         public string version {
             get {
                 return ((string)(this["version"]));
