@@ -42,7 +42,6 @@ namespace Oldschool_DayZ_Launcher
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
-            this.metroButton2 = new MetroFramework.Controls.MetroButton();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -168,24 +167,11 @@ namespace Oldschool_DayZ_Launcher
             this.metroLabel4.Text = "label";
             this.metroLabel4.Theme = MetroFramework.MetroThemeStyle.Dark;
             // 
-            // metroButton2
-            // 
-            this.metroButton2.Location = new System.Drawing.Point(951, 25);
-            this.metroButton2.Name = "metroButton2";
-            this.metroButton2.Size = new System.Drawing.Size(92, 23);
-            this.metroButton2.Style = MetroFramework.MetroColorStyle.Silver;
-            this.metroButton2.TabIndex = 10;
-            this.metroButton2.Text = "Join My Server";
-            this.metroButton2.Theme = MetroFramework.MetroThemeStyle.Dark;
-            this.metroButton2.UseSelectable = true;
-            this.metroButton2.Click += new System.EventHandler(this.metroButton2_Click);
-            // 
             // MainFrame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1172, 653);
-            this.Controls.Add(this.metroButton2);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.metroButton1);
             this.Controls.Add(this.metroLabel3);
@@ -220,6 +206,5 @@ namespace Oldschool_DayZ_Launcher
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.ColumnHeader columnHeader4;
         public MetroFramework.Controls.MetroLabel metroLabel4;
-        private MetroFramework.Controls.MetroButton metroButton2;
     }
 }
