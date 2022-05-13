@@ -21,7 +21,7 @@ namespace Oldschool_DayZ_Launcher
 {
     public partial class MainFrame : MetroFramework.Forms.MetroForm
     {
-        public static string[] ipList = { "158.69.22.190", "185.223.31.43" };
+        public static string[] ipList = { "158.69.22.190", "185.223.31.43", "193.110.160.36" };
         public static ArrayList filesToDownload = new ArrayList();
         public static ArrayList missingFiles = new ArrayList();
         public static ArrayList existingFiles = new ArrayList();
