@@ -20,8 +20,7 @@ using MetroFramework.Controls;
 namespace Oldschool_DayZ_Launcher
 {
     public partial class MainFrame : MetroFramework.Forms.MetroForm
-    {
-        public static string[] ipList = { "158.69.22.190", "185.223.31.43", "193.110.160.36" };
+    {    
         public static ArrayList filesToDownload = new ArrayList();
         public static ArrayList missingFiles = new ArrayList();
         public static ArrayList existingFiles = new ArrayList();
@@ -58,8 +57,6 @@ namespace Oldschool_DayZ_Launcher
                 return;
             }
 
-
-
             if (Settings.Default.steamToken == "")
             {              
                 var content = Interaction.InputBox("Go to this site: https://steamcommunity.com/dev/apikey and copy/paste your steam token down below. If its asking for domain name type in 127.0.0.1", "Steam Token", "Enter your token here", -1, -1);               
@@ -71,11 +68,37 @@ namespace Oldschool_DayZ_Launcher
             }     
             listView1.MouseClick += listView1_MouseClick;
 
-           // listView1.Visible = true;
-          //  pictureBox2.Visible = true;
-          //  pictureBox3.Visible = true; 
-          //  serverLoader();
-             gettingsFiles();          
+
+            if (Settings.Default.gamePath == "")
+            {
+                using (var fbd = new FolderBrowserDialog())
+                {
+                    fbd.Description = "Select the path where you want to install the game or the path of already existing files!";
+                    DialogResult result = fbd.ShowDialog();
+
+
+                    if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
+                    {
+                        Settings.Default.gamePath = fbd.SelectedPath;
+                        Settings.Default.Save();
+                        this.Controls.Remove(settingsTab);
+                        settingsState = false;
+                      //  MessageBox.Show("Gamepath saved!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        gettingsFiles();
+                    }
+                }           
+            }
+            else
+            {
+                gettingsFiles();
+            }
+
+
+            // listView1.Visible = true;
+            // pictureBox2.Visible = true;
+            // pictureBox3.Visible = true; 
+            // serverLoader();
+          //  gettingsFiles();          
         }
 
         private void listView1_MouseClick(object sender, MouseEventArgs e)
@@ -104,8 +127,8 @@ namespace Oldschool_DayZ_Launcher
         private void gettingsFiles()
         {
             metroLabel1.Text = "Status: Getting file list...";
-            wclient.DownloadFile(Settings.Default.serverURLfiles, Application.StartupPath + "\\files.txt");
-            var table = File.ReadAllLines(Application.StartupPath + "\\files.txt");
+            wclient.DownloadFile(Settings.Default.serverURLfiles, Settings.Default.gamePath + "\\files.txt");
+            var table = File.ReadAllLines(Settings.Default.gamePath + "\\files.txt");
             foreach (string fileName2 in table)
             {
                 if (fileName2 != "")
@@ -121,8 +144,8 @@ namespace Oldschool_DayZ_Launcher
         private void getFolders()
         {
             metroLabel1.Text = "Status: Getting folder list...";
-            wclient.DownloadFile(Settings.Default.serverURLfolders, Application.StartupPath + "\\folders.txt");
-            var folder = File.ReadAllLines(Application.StartupPath + "\\folders.txt");
+            wclient.DownloadFile(Settings.Default.serverURLfolders, Settings.Default.gamePath + "\\folders.txt");
+            var folder = File.ReadAllLines(Settings.Default.gamePath + "\\folders.txt");
             foreach (string folderName in folder)
             {
                 if (folderName != "")
@@ -141,7 +164,7 @@ namespace Oldschool_DayZ_Launcher
             {
                 if (folderName != "")
                 {
-                    if (!Directory.Exists(Application.StartupPath + "\\" + folderName))
+                    if (!Directory.Exists(Settings.Default.gamePath + "\\" + folderName))
                     {
                         missingFolders.Add(folderName);
                     }
@@ -158,7 +181,7 @@ namespace Oldschool_DayZ_Launcher
             {
                 if (missingFolderName != "")
                 {
-                    Directory.CreateDirectory(Application.StartupPath + "\\" + missingFolderName);
+                    Directory.CreateDirectory(Settings.Default.gamePath + "\\" + missingFolderName);
                 }
             }
             checkNotExistsFiles();
@@ -176,7 +199,7 @@ namespace Oldschool_DayZ_Launcher
                 if (file != "")
                 {
                     // MessageBox.Show(Application.StartupPath + "\\" + file);
-                    if (!File.Exists(Application.StartupPath + "\\" + file))
+                    if (!File.Exists(Settings.Default.gamePath + "\\" + file))
                     {
                         //  MessageBox.Show(file);
                         missingFiles.Add(file);
@@ -194,8 +217,8 @@ namespace Oldschool_DayZ_Launcher
         {
 
             metroLabel1.Text = "Status: Getting file bytes...";
-            wclient.DownloadFile(Settings.Default.serverURLbytes, Application.StartupPath + "\\bytes.txt");
-            var table = File.ReadAllLines(Application.StartupPath + "\\bytes.txt");
+            wclient.DownloadFile(Settings.Default.serverURLbytes, Settings.Default.gamePath + "\\bytes.txt");
+            var table = File.ReadAllLines(Settings.Default.gamePath + "\\bytes.txt");
             foreach (string byteS in table)
             {
                 if (byteS != "")
@@ -214,10 +237,10 @@ namespace Oldschool_DayZ_Launcher
 
             metroLabel1.Text = "Status: Check bytes of existing files...";
             foreach (string fileBytes in filesToDownload)
-            {
-                if (File.Exists(Application.StartupPath + "\\" + fileBytes))
+            {             
+                if (File.Exists(Settings.Default.gamePath + "\\" + fileBytes))
                 {
-                    if (FileSystem.FileLen(fileBytes).ToString() != bytesOfFiles[0].ToString())
+                    if (FileSystem.FileLen(Settings.Default.gamePath + "\\" + fileBytes).ToString() != bytesOfFiles[0].ToString())
                     {
                         needToDownload.Add(fileBytes);
                         bytesOfFiles.RemoveAt(0);
@@ -264,7 +287,7 @@ namespace Oldschool_DayZ_Launcher
                     wc.DownloadFileCompleted += wc_DownloadFileCompleted;                  
                     metroLabel2.Text = needToDownload[0].ToString();
                     metroLabel3.Text = fileCounter.ToString() + " / " + downloadedFileCounter;
-                    wc.DownloadFileAsync(new Uri(Settings.Default.serverURLdownload + needToDownload[0].ToString()), Application.StartupPath + "\\" + needToDownload[0].ToString());
+                    wc.DownloadFileAsync(new Uri(Settings.Default.serverURLdownload + needToDownload[0].ToString()), Settings.Default.gamePath + "\\" + needToDownload[0].ToString());
                 }
             }
             else if (fileCounter >= downloadedFileCounter)
@@ -363,10 +386,26 @@ namespace Oldschool_DayZ_Launcher
             stopGame();
             string startParameter = "-connect #ip#";
 
-            if (File.Exists(Application.StartupPath + "\\DayZ_x64.exe"))
+            if (File.Exists(Settings.Default.gamePath + "\\DayZ_x64.exe"))
             {
                 startParameter = startParameter.Replace("#ip#", ip);
-                Process.Start(Application.StartupPath + "\\DayZ_x64.exe", startParameter);
+                Process.Start(Settings.Default.gamePath + "\\DayZ_x64.exe", startParameter);
+            }
+            else
+            {
+                var result = MessageBox.Show("Cant find DayZ_x64.exe in your selected gamepath! Do you want to download dayz into '" + Settings.Default.gamePath + "'?", " Error", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                if (result == DialogResult.Yes)
+                {
+                    listView1.Visible = false;
+                    metroLabel2.Visible = true;
+                    metroLabel1.Visible = true;
+                    metroLabel3.Visible = true;
+                    metroProgressBar1.Visible = true;
+                    metroLabel4.Visible = true;                 
+                    pictureBox2.Visible = false;
+                    pictureBox3.Visible = false;
+                    gettingsFiles();
+                }
             }
         }
 
@@ -374,8 +413,7 @@ namespace Oldschool_DayZ_Launcher
         private string getVersionByAddr(string addr)
         {
             string version = "";
-            string response = wclient.DownloadString("https://api.steampowered.com/IGameServersService/GetServerList/v1/?key=" + Settings.Default.steamToken + "&filter=appid\\221100\\version_match\\0.62.140099");
-           // string response = wclient.DownloadString("https://api.steampowered.com/IGameServersService/GetServerList/v1/?key=" + Settings.Default.steamToken + "&filter=addr\\" + addr.Split(Convert.ToChar(":"))[0]);
+            string response = wclient.DownloadString("https://api.steampowered.com/IGameServersService/GetServerList/v1/?key=" + Settings.Default.steamToken + "&filter=appid\\221100\\version_match\\0.62.140099");       
 
             if (response != "{'response':{}}")
             {
@@ -459,13 +497,24 @@ namespace Oldschool_DayZ_Launcher
         }
          public static MetroPanel settingsTab { get; set; }
 
-        public static bool settingsState = false;
+         public static bool settingsState = false;
         
 
         private void createSettingsTabWithAnimation()
         {
             if (settingsState == false)
             {
+                //string gamePathDirectory = String.Empty;
+                //if (Settings.Default.gamePath != "")
+                //{
+                //    gamePathDirectory = Settings.Default.gamePath;
+                //}
+                //else
+                //{
+                //    gamePathDirectory = Application.StartupPath;
+                //}
+
+
                 Color c = Color.FromArgb(17, 17, 17);
                 PictureBox closeButton = new PictureBox();
                 MetroPanel settingsPanel = new MetroPanel();
@@ -494,7 +543,7 @@ namespace Oldschool_DayZ_Launcher
 
                 gamePath.Location = new Point(40, 18);
                 gamePath.Size = new Size(250, 25);
-                gamePath.Text = "";
+                gamePath.Text = Settings.Default.gamePath;
                 gamePath.Enabled = false;
                 gamePath.Style = MetroFramework.MetroColorStyle.Silver;
                 gamePath.Theme = MetroFramework.MetroThemeStyle.Dark;
@@ -579,7 +628,19 @@ namespace Oldschool_DayZ_Launcher
 
         private void ChangeGamePath_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Not implemented yet! I will add it in the next update", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            using (var fbd = new FolderBrowserDialog())
+            {
+                DialogResult result = fbd.ShowDialog();
+
+                if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
+                {
+                    Settings.Default.gamePath = fbd.SelectedPath;
+                    Settings.Default.Save();
+                    this.Controls.Remove(settingsTab);
+                    settingsState = false;
+                    MessageBox.Show("Gamepath saved!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }       
         }
 
         private void closeSettingsTab(object sender, EventArgs e)

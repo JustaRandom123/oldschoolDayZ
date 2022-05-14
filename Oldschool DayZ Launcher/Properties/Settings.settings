@@ -18,7 +18,7 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="version" Type="System.String" Scope="User">
-      <Value Profile="(Default)">2.1</Value>
+      <Value Profile="(Default)">2.2</Value>
     </Setting>
     <Setting Name="gamePath" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
