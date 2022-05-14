@@ -39,6 +39,13 @@ namespace Oldschool_DayZ_Launcher
         public MainFrame()
         {
             InitializeComponent();
+
+            this.FormClosing += MainFrame_FormClosing;
+        }
+
+        private void MainFrame_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
         }
 
         private void MainFrame_Load(object sender, EventArgs e)
@@ -55,7 +62,7 @@ namespace Oldschool_DayZ_Launcher
 
             if (Settings.Default.steamToken == "")
             {              
-                var content = Interaction.InputBox("Go to this site: https://steamcommunity.com/dev/apikey and copy/paste your steam token down below", "Steam Token", "Enter your token here", -1, -1);               
+                var content = Interaction.InputBox("Go to this site: https://steamcommunity.com/dev/apikey and copy/paste your steam token down below. If its asking for domain name type in 127.0.0.1", "Steam Token", "Enter your token here", -1, -1);               
                 if (content != null)
                 {             
                     Settings.Default.steamToken = content;
@@ -362,8 +369,9 @@ namespace Oldschool_DayZ_Launcher
 
         private string getVersionByAddr(string addr)
         {
-            string version = "";                 
-            string response = wclient.DownloadString("https://api.steampowered.com/IGameServersService/GetServerList/v1/?key=" + Settings.Default.steamToken + "&filter=addr\\" + addr.Split(Convert.ToChar(":"))[0]);
+            string version = "";
+            string response = wclient.DownloadString("https://api.steampowered.com/IGameServersService/GetServerList/v1/?key=" + Settings.Default.steamToken + "&filter=appid\\221100\\version_match\\0.62.140099");
+           // string response = wclient.DownloadString("https://api.steampowered.com/IGameServersService/GetServerList/v1/?key=" + Settings.Default.steamToken + "&filter=addr\\" + addr.Split(Convert.ToChar(":"))[0]);
 
             if (response != "{'response':{}}")
             {
@@ -383,29 +391,30 @@ namespace Oldschool_DayZ_Launcher
 
         private void serverLoader()
         {
-            foreach (string ip in ipList)
+           // foreach (string ip in ipList)
+           // {
+                // string response = wclient.DownloadString("https://api.steampowered.com/IGameServersService/GetServerList/v1/?key=" + Settings.Default.steamToken + "&filter=addr\\" + ip);
+                string response = wclient.DownloadString("https://api.steampowered.com/IGameServersService/GetServerList/v1/?key=" + Settings.Default.steamToken + "&filter=appid\\221100\\version_match\\0.62.140099");
+
+
+                var serverlist = JObject.Parse(response);
+
+            if (serverlist["response"].ToString() != "{}")
             {
-                string response = wclient.DownloadString("https://api.steampowered.com/IGameServersService/GetServerList/v1/?key=" + Settings.Default.steamToken + "&filter=addr\\" + ip);
-
-               
-                    var serverlist = JObject.Parse(response);
-
-                if (serverlist["response"].ToString() != "{}")
-                    {
 
 
 
-                    foreach (var table in serverlist["response"]["servers"])
-                    {
-                        ListViewItem item = new ListViewItem(table["name"].ToString());
-                        item.SubItems.Add(table["players"].ToString() + " / " + table["max_players"].ToString());
-                        item.SubItems.Add(table["map"].ToString());
-                        item.SubItems.Add(table["version"].ToString());
-                        item.Name = table["addr"].ToString().Split(Convert.ToChar(":"))[0] + ":" + table["gameport"].ToString();
-                        listView1.Items.Add(item);
-                    }
-                }               
-            }           
+                foreach (var table in serverlist["response"]["servers"])
+                {
+                    ListViewItem item = new ListViewItem(table["name"].ToString());
+                    item.SubItems.Add(table["players"].ToString() + " / " + table["max_players"].ToString());
+                    item.SubItems.Add(table["map"].ToString());
+                    item.SubItems.Add(table["version"].ToString());
+                    item.Name = table["addr"].ToString().Split(Convert.ToChar(":"))[0] + ":" + table["gameport"].ToString();
+                    listView1.Items.Add(item);
+                }
+            }             
+            //}           
         }
 
         private void metroButton1_Click(object sender, EventArgs e)
@@ -428,9 +437,6 @@ namespace Oldschool_DayZ_Launcher
             }
         }
 
-        private void metroButton2_Click(object sender, EventArgs e)
-        {
-            startGame("185.223.31.43:2302");
-        }
+       
     }
 }
