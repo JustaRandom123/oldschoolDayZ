@@ -73,13 +73,25 @@ namespace Oldschool_DayZ_Launcher.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("2.0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("2.1")]
         public string version {
             get {
                 return ((string)(this["version"]));
             }
             set {
                 this["version"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string gamePath {
+            get {
+                return ((string)(this["gamePath"]));
+            }
+            set {
+                this["gamePath"] = value;
             }
         }
     }

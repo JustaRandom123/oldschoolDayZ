@@ -72,6 +72,8 @@ namespace Oldschool_DayZ_Launcher
             listView1.MouseClick += listView1_MouseClick;
 
            // listView1.Visible = true;
+          //  pictureBox2.Visible = true;
+          //  pictureBox3.Visible = true; 
           //  serverLoader();
              gettingsFiles();          
         }
@@ -276,7 +278,8 @@ namespace Oldschool_DayZ_Launcher
                 metroProgressBar1.Visible = false;
                 metroLabel4.Visible = false;
                 serverLoader();
-                metroButton1.Visible = true;
+                pictureBox2.Visible = true;
+                pictureBox3.Visible = true;
 
 
                 metroProgressBar1.Value = 100;
@@ -314,7 +317,8 @@ namespace Oldschool_DayZ_Launcher
                 metroProgressBar1.Visible = false;
                 metroLabel4.Visible = false;
                 serverLoader();
-                metroButton1.Visible = true;
+                pictureBox2.Visible = true;
+                pictureBox3.Visible = true;
 
 
                 metroProgressBar1.Value = 100;            
@@ -391,30 +395,36 @@ namespace Oldschool_DayZ_Launcher
 
         private void serverLoader()
         {
-           // foreach (string ip in ipList)
-           // {
-                // string response = wclient.DownloadString("https://api.steampowered.com/IGameServersService/GetServerList/v1/?key=" + Settings.Default.steamToken + "&filter=addr\\" + ip);
+            try
+            {
+
+
                 string response = wclient.DownloadString("https://api.steampowered.com/IGameServersService/GetServerList/v1/?key=" + Settings.Default.steamToken + "&filter=appid\\221100\\version_match\\0.62.140099");
 
 
                 var serverlist = JObject.Parse(response);
 
-            if (serverlist["response"].ToString() != "{}")
-            {
-
-
-
-                foreach (var table in serverlist["response"]["servers"])
+                if (serverlist["response"].ToString() != "{}")
                 {
-                    ListViewItem item = new ListViewItem(table["name"].ToString());
-                    item.SubItems.Add(table["players"].ToString() + " / " + table["max_players"].ToString());
-                    item.SubItems.Add(table["map"].ToString());
-                    item.SubItems.Add(table["version"].ToString());
-                    item.Name = table["addr"].ToString().Split(Convert.ToChar(":"))[0] + ":" + table["gameport"].ToString();
-                    listView1.Items.Add(item);
+
+
+
+                    foreach (var table in serverlist["response"]["servers"])
+                    {
+                        ListViewItem item = new ListViewItem(table["name"].ToString());
+                        item.SubItems.Add(table["players"].ToString() + " / " + table["max_players"].ToString());
+                        item.SubItems.Add(table["map"].ToString());
+                        item.SubItems.Add(table["version"].ToString());
+                        item.Name = table["addr"].ToString().Split(Convert.ToChar(":"))[0] + ":" + table["gameport"].ToString();
+                        listView1.Items.Add(item);
+                    }
                 }
-            }             
-            //}           
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show("Looks like your steam token is invalid! Check your launcher settings", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+                  
         }
 
         private void metroButton1_Click(object sender, EventArgs e)
@@ -437,6 +447,145 @@ namespace Oldschool_DayZ_Launcher
             }
         }
 
-       
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            listView1.Items.Clear();
+            serverLoader();
+        }
+
+        private void pictureBox3_Click(object sender, EventArgs e)
+        {
+            createSettingsTabWithAnimation();
+        }
+         public static MetroPanel settingsTab { get; set; }
+
+        public static bool settingsState = false;
+        
+
+        private void createSettingsTabWithAnimation()
+        {
+            if (settingsState == false)
+            {
+                Color c = Color.FromArgb(17, 17, 17);
+                PictureBox closeButton = new PictureBox();
+                MetroPanel settingsPanel = new MetroPanel();
+                MetroButton gamePath = new MetroButton();
+                MetroLabel gamePathLabel = new MetroLabel();
+                MetroButton changeGamePath = new MetroButton();
+                MetroTextBox steamToken = new MetroTextBox();
+                MetroLabel steamTokenLabel = new MetroLabel();
+
+                MetroButton saveSteamToken = new MetroButton();
+
+
+
+                settingsPanel.Size = new Size(487, 626);
+                settingsPanel.Location = new Point(685, 25);
+                settingsPanel.Theme = MetroFramework.MetroThemeStyle.Dark;
+                settingsPanel.Style = MetroFramework.MetroColorStyle.Silver;
+
+
+                closeButton.Size = new Size(32, 32);
+                closeButton.Location = new Point(0, 0);
+                closeButton.Image = Oldschool_DayZ_Launcher.Properties.Resources.close;
+                closeButton.BackColor = c;
+                closeButton.Click += closeSettingsTab;
+                closeButton.Cursor = Cursors.Hand;
+
+                gamePath.Location = new Point(40, 18);
+                gamePath.Size = new Size(250, 25);
+                gamePath.Text = "";
+                gamePath.Enabled = false;
+                gamePath.Style = MetroFramework.MetroColorStyle.Silver;
+                gamePath.Theme = MetroFramework.MetroThemeStyle.Dark;
+
+
+                changeGamePath.Location = new Point(40, 47);
+                changeGamePath.Size = new Size(250, 25);
+                changeGamePath.Text = "Change game path";
+                changeGamePath.Enabled = true;
+                changeGamePath.Style = MetroFramework.MetroColorStyle.Silver;
+                changeGamePath.Theme = MetroFramework.MetroThemeStyle.Dark;
+                changeGamePath.Click += ChangeGamePath_Click;
+                changeGamePath.Cursor = Cursors.Hand;
+
+
+                gamePathLabel.Location = new Point(40, 0);
+                gamePathLabel.Size = new Size(250, 25);
+                gamePathLabel.Text = "Game Path";
+                gamePathLabel.Enabled = false;
+                gamePathLabel.Style = MetroFramework.MetroColorStyle.Silver;
+                gamePathLabel.Theme = MetroFramework.MetroThemeStyle.Dark;
+
+
+
+                ///
+
+                steamToken.Location = new Point(40, 120);
+                steamToken.Size = new Size(250, 25);
+                steamToken.Text = Settings.Default.steamToken;
+                steamToken.Enabled = true;
+                steamToken.Style = MetroFramework.MetroColorStyle.Silver;
+                steamToken.Theme = MetroFramework.MetroThemeStyle.Dark;
+
+
+                steamTokenLabel.Location = new Point(40, 95);
+                steamTokenLabel.Size = new Size(250, 25);
+                steamTokenLabel.Text = "Steam API token";
+                steamTokenLabel.Enabled = false;
+                steamTokenLabel.Style = MetroFramework.MetroColorStyle.Silver;
+                steamTokenLabel.Theme = MetroFramework.MetroThemeStyle.Dark;
+
+
+                saveSteamToken.Location = new Point(40, 150);
+                saveSteamToken.Size = new Size(250, 25);
+                saveSteamToken.Text = "Save steam token";
+                saveSteamToken.Enabled = true;
+                saveSteamToken.Style = MetroFramework.MetroColorStyle.Silver;
+                saveSteamToken.Theme = MetroFramework.MetroThemeStyle.Dark;
+                saveSteamToken.Click += SaveSteamToken_Click; ;
+                saveSteamToken.Cursor = Cursors.Hand;
+
+
+
+                settingsPanel.Controls.Add(saveSteamToken);
+                settingsPanel.Controls.Add(steamTokenLabel);
+                settingsPanel.Controls.Add(steamToken);
+                settingsPanel.Controls.Add(changeGamePath);
+                settingsPanel.Controls.Add(gamePath);
+                settingsPanel.Controls.Add(gamePathLabel);
+                settingsPanel.Controls.Add(closeButton);
+
+                Controls.Add(settingsPanel);
+                settingsPanel.BringToFront();
+                settingsTab = settingsPanel;
+
+                settingsState = true;
+            }
+        }
+
+        private void SaveSteamToken_Click(object sender, EventArgs e)
+        {
+            foreach (Control ctrl in settingsTab.Controls)
+            {
+                if (ctrl.ToString() == "MetroFramework.Controls.MetroTextBox")
+                {             
+                    Settings.Default.steamToken = ctrl.Text;
+                    Settings.Default.Save();
+                    MessageBox.Show("Steam token saved!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+        }
+
+        private void ChangeGamePath_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Not implemented yet! I will add it in the next update", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void closeSettingsTab(object sender, EventArgs e)
+        {
+            this.Controls.Remove(settingsTab);
+            settingsState = false;
+        }
     }
 }
