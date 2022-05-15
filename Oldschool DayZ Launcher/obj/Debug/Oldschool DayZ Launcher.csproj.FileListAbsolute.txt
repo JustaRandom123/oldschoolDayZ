@@ -39,6 +39,7 @@ C:\Users\Jonas\source\repos\Oldschool DayZ Launcher\Oldschool DayZ Launcher\obj\
 D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\bin\Debug\Oldschool DayZ Launcher.exe.config
 D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\bin\Debug\Oldschool DayZ Launcher.exe
 D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\bin\Debug\Oldschool DayZ Launcher.pdb
+D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\bin\Debug\DiscordRPC.dll
 D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\bin\Debug\MetroFramework.Design.dll
 D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\bin\Debug\MetroFramework.dll
 D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\bin\Debug\MetroFramework.Fonts.dll
@@ -53,6 +54,8 @@ D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\bin\Debug\System.Numerics.Vector
 D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
 D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\bin\Debug\System.Security.AccessControl.dll
 D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\bin\Debug\System.Security.Principal.Windows.dll
+D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\bin\Debug\DiscordRPC.pdb
+D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\bin\Debug\DiscordRPC.xml
 D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\bin\Debug\Microsoft.Win32.Registry.xml
 D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\bin\Debug\Newtonsoft.Json.xml
 D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\bin\Debug\protobuf-net.xml
@@ -67,7 +70,6 @@ D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\bin\Debug\System.Security.Princi
 D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\obj\Debug\Oldschool DayZ Launcher.csproj.AssemblyReference.cache
 D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\obj\Debug\Oldschool DayZ Launcher.csproj.SuggestedBindingRedirects.cache
 D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\obj\Debug\Oldschool_DayZ_Launcher.MainFrame.resources
-D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\obj\Debug\Oldschool_DayZ_Launcher.steamLoginFrame.resources
 D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\obj\Debug\Oldschool_DayZ_Launcher.Properties.Resources.resources
 D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\obj\Debug\Oldschool DayZ Launcher.csproj.GenerateResource.cache
 D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\obj\Debug\Oldschool DayZ Launcher.csproj.CoreCompileInputs.cache

@@ -40,6 +40,8 @@ namespace Oldschool_DayZ_Launcher
             InitializeComponent();
 
             this.FormClosing += MainFrame_FormClosing;
+
+            Discord.Initialize();
         }
 
         private void MainFrame_FormClosing(object sender, FormClosingEventArgs e)
@@ -110,19 +112,24 @@ namespace Oldschool_DayZ_Launcher
                 if (itemRect.Contains(e.Location))
                 {
                     if (getVersionByAddr(item.Name) != "0.62.140099")
-                    {               
+                    {
                         MessageBox.Show("This version is not supported!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         break;
                     }
                     else
-                    {                      
-                        startGame(item.Name);
+                    {                                                               
+                        startGame(item.Name);                      
+                        Discord.changeDiscordRPC(item.Text, "Playing on", "OSD Launcher", "logo");
                         break;
                     }                  
                 }
             }
         }
-       
+
+        private void T_Tick(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
 
         private void gettingsFiles()
         {
@@ -435,11 +442,7 @@ namespace Oldschool_DayZ_Launcher
         {
             try
             {
-
-
                 string response = wclient.DownloadString("https://api.steampowered.com/IGameServersService/GetServerList/v1/?key=" + Settings.Default.steamToken + "&filter=appid\\221100\\version_match\\0.62.140099");
-
-
                 var serverlist = JObject.Parse(response);
 
                 if (serverlist["response"].ToString() != "{}")
@@ -483,6 +486,8 @@ namespace Oldschool_DayZ_Launcher
             {
                 pr.Kill();
             }
+
+            Discord.changeDiscordRPC("Running Launcher", "", "OSD Launcher", "logo");
         }
 
         private void pictureBox2_Click(object sender, EventArgs e)
@@ -647,6 +652,11 @@ namespace Oldschool_DayZ_Launcher
         {
             this.Controls.Remove(settingsTab);
             settingsState = false;
+        }
+
+        private void getServerNameByIP()
+        {
+
         }
     }
 }

@@ -196,6 +196,7 @@ namespace Oldschool_DayZ_Launcher
             this.Controls.Add(this.metroProgressBar1);
             this.Controls.Add(this.metroLabel4);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "MainFrame";
             this.Style = MetroFramework.MetroColorStyle.Silver;
             this.Text = "Oldschool DayZ";

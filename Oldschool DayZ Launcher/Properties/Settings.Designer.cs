@@ -71,15 +71,12 @@ namespace Oldschool_DayZ_Launcher.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("2.2")]
+        [global::System.Configuration.DefaultSettingValueAttribute("3.0")]
         public string version {
             get {
                 return ((string)(this["version"]));
-            }
-            set {
-                this["version"] = value;
             }
         }
         
