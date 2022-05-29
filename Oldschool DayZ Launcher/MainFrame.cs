@@ -16,6 +16,8 @@ using System.Windows.Forms;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using MetroFramework.Controls;
+using SteamQueryNet;
+using SteamQueryNet.Models;
 
 namespace Oldschool_DayZ_Launcher
 {
@@ -31,6 +33,8 @@ namespace Oldschool_DayZ_Launcher
         public static string fileName;
         public static int fileCounter = 0;
         public static int downloadedFileCounter = 0;
+
+        public static int playersCountGeneral = 0;
 
         static WebClient wclient = new WebClient();
 
@@ -105,25 +109,25 @@ namespace Oldschool_DayZ_Launcher
 
         private void listView1_MouseClick(object sender, MouseEventArgs e)
         {
-            for (int i = 0; i < listView1.Items.Count; i++)
-            {
-                ListViewItem item = listView1.Items[i];
-                Rectangle itemRect = item.GetBounds(ItemBoundsPortion.Label);
-                if (itemRect.Contains(e.Location))
-                {
-                    if (getVersionByAddr(item.Name) != "0.62.140099")
-                    {
-                        MessageBox.Show("This version is not supported!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        break;
-                    }
-                    else
-                    {                                                               
-                        startGame(item.Name);                      
-                        Discord.changeDiscordRPC(item.Text, "Playing on", "OSD Launcher", "logo");
-                        break;
-                    }                  
-                }
-            }
+            //for (int i = 0; i < listView1.Items.Count; i++)
+            //{
+            //    ListViewItem item = listView1.Items[i];
+            //    Rectangle itemRect = item.GetBounds(ItemBoundsPortion.Label);
+            //    if (itemRect.Contains(e.Location))
+            //    {
+            //        if (getVersionByAddr(item.Name) != "0.62.140099")
+            //        {
+            //            MessageBox.Show("This version is not supported!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //            break;
+            //        }
+            //        else
+            //        {                                                               
+            //            startGame(item.Name);                      
+            //            Discord.changeDiscordRPC(item.Text, "Playing on", "OSD Launcher", "logo");
+            //            break;
+            //        }                  
+            //    }
+            //}
         }
 
         private void T_Tick(object sender, EventArgs e)
@@ -438,28 +442,96 @@ namespace Oldschool_DayZ_Launcher
             return version;
         }
 
+
+
+        private string getNameByAddr(string addr)
+        {
+            string name = "";
+            string response = wclient.DownloadString("https://api.steampowered.com/IGameServersService/GetServerList/v1/?key=" + Settings.Default.steamToken + "&filter=appid\\221100\\version_match\\0.62.140099");
+
+            if (response != "{'response':{}}")
+            {
+                var serverlist = JObject.Parse(response);
+
+                foreach (var table in serverlist["response"]["servers"])
+                {
+                    if (table["addr"].ToString().Split(Convert.ToChar(":"))[0] + ":" + table["gameport"].ToString() == addr)
+                    {
+                        name = table["name"].ToString();
+                        break;
+                    }
+                }
+            }
+            return name;
+        }
+
+
+
+        // Control[] playerlistButtons = {};
+
+
         private void serverLoader()
         {
             try
             {
+                playersCountGeneral = 0;
                 string response = wclient.DownloadString("https://api.steampowered.com/IGameServersService/GetServerList/v1/?key=" + Settings.Default.steamToken + "&filter=appid\\221100\\version_match\\0.62.140099");
                 var serverlist = JObject.Parse(response);
 
                 if (serverlist["response"].ToString() != "{}")
                 {
-
-
-
                     foreach (var table in serverlist["response"]["servers"])
                     {
+
+
                         ListViewItem item = new ListViewItem(table["name"].ToString());
                         item.SubItems.Add(table["players"].ToString() + " / " + table["max_players"].ToString());
                         item.SubItems.Add(table["map"].ToString());
                         item.SubItems.Add(table["version"].ToString());
-                        item.Name = table["addr"].ToString().Split(Convert.ToChar(":"))[0] + ":" + table["gameport"].ToString();
+                        item.SubItems.Add("");
+                        item.SubItems.Add("");
+                        //  item.Name = table["addr"].ToString().Split(Convert.ToChar(":"))[0] + ":" + table["gameport"].ToString();
                         listView1.Items.Add(item);
+                        
+
+
+                        MetroButton testButton = new MetroButton();
+                        testButton.Text = "";
+                        testButton.BackgroundImage = Oldschool_DayZ_Launcher.Properties.Resources.user1;
+                        testButton.BackgroundImageLayout = ImageLayout.Stretch;           
+                        testButton.Style = MetroFramework.MetroColorStyle.Silver;
+                        testButton.Theme = MetroFramework.MetroThemeStyle.Dark;
+                        testButton.Tag = table["addr"].ToString();
+                        testButton.Cursor = Cursors.Hand;
+                        testButton.Size = new Size(item.SubItems[4].Bounds.Size.Width, item.SubItems[4].Bounds.Size.Height);
+                        testButton.Location = new Point(item.SubItems[4].Bounds.Location.X, item.SubItems[4].Bounds.Location.Y);
+                        testButton.Click += PlayerList_Click;
+
+
+
+                        MetroButton playerButton = new MetroButton();
+                        playerButton.Text = "";
+                        playerButton.BackgroundImage = Oldschool_DayZ_Launcher.Properties.Resources.play;
+                        playerButton.BackgroundImageLayout = ImageLayout.Stretch;
+                        playerButton.Style = MetroFramework.MetroColorStyle.Silver;
+                        playerButton.Theme = MetroFramework.MetroThemeStyle.Dark;
+                        playerButton.Tag = table["addr"].ToString().Split(Convert.ToChar(":"))[0] + ":" + table["gameport"].ToString(); ;
+                        playerButton.Cursor = Cursors.Hand;
+                        playerButton.Size = new Size(item.SubItems[5].Bounds.Size.Width, item.SubItems[5].Bounds.Size.Height);
+                        playerButton.Location = new Point(item.SubItems[5].Bounds.Location.X, item.SubItems[5].Bounds.Location.Y);                       
+                        playerButton.Click += PlayButton_Click;
+
+
+
+
+                        listView1.Controls.Add(testButton);
+                        listView1.Controls.Add(playerButton);
+                        playersCountGeneral = playersCountGeneral + Convert.ToInt32(table["players"].ToString());
+
                     }
                 }
+                this.Text = "Oldschool DayZ - " + playersCountGeneral.ToString() + " players online";
+                this.Refresh();
             }
             catch(Exception e)
             {
@@ -468,11 +540,60 @@ namespace Oldschool_DayZ_Launcher
                   
         }
 
-        private void metroButton1_Click(object sender, EventArgs e)
+        private void PlayButton_Click(object sender, EventArgs e)
         {
-            listView1.Items.Clear();
-            serverLoader();
+            MetroButton clickedButton = sender as MetroButton;
+            if (clickedButton != null)
+            {
+                Console.WriteLine(clickedButton.Tag.ToString());
+
+
+                if (getVersionByAddr(clickedButton.Tag.ToString()) != "0.62.140099")
+                {
+                    MessageBox.Show("This version is not supported!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);            
+                }
+                else
+                {
+                    startGame(clickedButton.Tag.ToString());
+                    Discord.changeDiscordRPC(getNameByAddr(clickedButton.Tag.ToString()), "Playing on", "OSD Launcher", "logo");              
+                }
+            }
         }
+
+        private void PlayerList_Click(object sender, EventArgs e)
+        {
+            MetroButton clickedButton = sender as MetroButton;
+            if (clickedButton != null)
+            {           
+                StringBuilder sb = new StringBuilder(); 
+                string ip = clickedButton.Tag.ToString();
+                var playerinfo = new ServerQuery().Connect(ip.Split(Convert.ToChar(":"))[0], Convert.ToUInt16(ip.Split(Convert.ToChar(":"))[1])).GetPlayers();
+
+                foreach (Player player in playerinfo)
+                {
+                    sb.AppendLine(player.Name + " | Playtime: " + player.TotalDurationAsString);
+                }
+
+
+                if (sb.ToString().Length <= 0)
+                {
+                    MessageBox.Show("Empty", "Playerlist", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show(sb.ToString(), "Playerlist", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
+              
+            }
+        }
+
+        //private void metroButton1_Click(object sender, EventArgs e)
+        //{
+        //    listView1.Items.Clear();
+        //    listView1.Controls.Clear();
+        //    serverLoader();
+        //}
 
         private void metroListView1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -493,6 +614,7 @@ namespace Oldschool_DayZ_Launcher
         private void pictureBox2_Click(object sender, EventArgs e)
         {
             listView1.Items.Clear();
+            listView1.Controls.Clear();
             serverLoader();
         }
 
@@ -655,6 +777,11 @@ namespace Oldschool_DayZ_Launcher
         }
 
         private void getServerNameByIP()
+        {
+
+        }
+
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }

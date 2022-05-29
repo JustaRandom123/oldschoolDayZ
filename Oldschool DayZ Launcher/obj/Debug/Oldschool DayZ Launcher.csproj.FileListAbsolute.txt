@@ -76,3 +76,4 @@ D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\obj\Debug\Oldschool DayZ Launche
 D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\obj\Debug\Oldschool DayZ Launcher.csproj.CopyComplete
 D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\obj\Debug\Oldschool DayZ Launcher.exe
 D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\obj\Debug\Oldschool DayZ Launcher.pdb
+D:\Github\oldschoolDayZ\Oldschool DayZ Launcher\bin\Debug\SteamQueryNet.dll
