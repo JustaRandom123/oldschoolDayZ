@@ -495,26 +495,32 @@ namespace Oldschool_DayZ_Launcher
                         
 
 
-                        MetroButton testButton = new MetroButton();
+                        Button testButton = new Button();
                         testButton.Text = "";
                         testButton.BackgroundImage = Oldschool_DayZ_Launcher.Properties.Resources.user1;
-                        testButton.BackgroundImageLayout = ImageLayout.Stretch;           
-                        testButton.Style = MetroFramework.MetroColorStyle.Silver;
-                        testButton.Theme = MetroFramework.MetroThemeStyle.Dark;
+                        testButton.BackgroundImageLayout = ImageLayout.Stretch;
+                        testButton.BackColor = Color.Transparent;
+                       // testButton.Style = MetroFramework.MetroColorStyle.Silver;
+                       // testButton.Theme = MetroFramework.MetroThemeStyle.Dark;
                         testButton.Tag = table["addr"].ToString();
                         testButton.Cursor = Cursors.Hand;
+                        testButton.FlatStyle = FlatStyle.Flat;
+                        testButton.FlatAppearance.BorderSize = 0;
                         testButton.Size = new Size(item.SubItems[4].Bounds.Size.Width, item.SubItems[4].Bounds.Size.Height);
                         testButton.Location = new Point(item.SubItems[4].Bounds.Location.X, item.SubItems[4].Bounds.Location.Y);
                         testButton.Click += PlayerList_Click;
 
 
 
-                        MetroButton playerButton = new MetroButton();
+                        Button playerButton = new Button();
                         playerButton.Text = "";
                         playerButton.BackgroundImage = Oldschool_DayZ_Launcher.Properties.Resources.play;
                         playerButton.BackgroundImageLayout = ImageLayout.Stretch;
-                        playerButton.Style = MetroFramework.MetroColorStyle.Silver;
-                        playerButton.Theme = MetroFramework.MetroThemeStyle.Dark;
+                        playerButton.BackColor = Color.Transparent;
+                        playerButton.FlatStyle = FlatStyle.Flat;
+                        playerButton.FlatAppearance.BorderSize =0;
+                        //  playerButton.Style = MetroFramework.MetroColorStyle.Silver;
+                        //  playerButton.Theme = MetroFramework.MetroThemeStyle.Dark;
                         playerButton.Tag = table["addr"].ToString().Split(Convert.ToChar(":"))[0] + ":" + table["gameport"].ToString(); ;
                         playerButton.Cursor = Cursors.Hand;
                         playerButton.Size = new Size(item.SubItems[5].Bounds.Size.Width, item.SubItems[5].Bounds.Size.Height);
@@ -542,7 +548,7 @@ namespace Oldschool_DayZ_Launcher
 
         private void PlayButton_Click(object sender, EventArgs e)
         {
-            MetroButton clickedButton = sender as MetroButton;
+            Button clickedButton = sender as Button;
             if (clickedButton != null)
             {
                 Console.WriteLine(clickedButton.Tag.ToString());
@@ -562,7 +568,7 @@ namespace Oldschool_DayZ_Launcher
 
         private void PlayerList_Click(object sender, EventArgs e)
         {
-            MetroButton clickedButton = sender as MetroButton;
+            Button clickedButton = sender as Button;
             if (clickedButton != null)
             {           
                 StringBuilder sb = new StringBuilder(); 
