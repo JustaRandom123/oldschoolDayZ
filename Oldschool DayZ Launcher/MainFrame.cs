@@ -568,31 +568,53 @@ namespace Oldschool_DayZ_Launcher
 
         private void PlayerList_Click(object sender, EventArgs e)
         {
-            Button clickedButton = sender as Button;
-            if (clickedButton != null)
-            {           
-                StringBuilder sb = new StringBuilder(); 
-                string ip = clickedButton.Tag.ToString();
-                var playerinfo = new ServerQuery().Connect(ip.Split(Convert.ToChar(":"))[0], Convert.ToUInt16(ip.Split(Convert.ToChar(":"))[1])).GetPlayers();
-
-                foreach (Player player in playerinfo)
+            _ = Task.Run(async () =>
+            {
+                Button clickedButton = sender as Button;
+                if (clickedButton != null)
                 {
-                    sb.AppendLine(player.Name + " | Playtime: " + player.TotalDurationAsString);
-                }
+                    StringBuilder sb = new StringBuilder();
+                    string ip = clickedButton.Tag.ToString();
 
 
-                if (sb.ToString().Length <= 0)
-                {
-                    MessageBox.Show("Empty", "Playerlist", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                else
-                {
+
+                    var playerinfo = new List<Player>();
+
+                    using (var serverConnector = new ServerQuery())
+                    {
+                        serverConnector.Connect(ip.Split(Convert.ToChar(":"))[0], Convert.ToUInt16(ip.Split(Convert.ToChar(":"))[1]));
+
+                        int timeout = 2000;
+                        var task = serverConnector.GetPlayersAsync();
+                        if (await Task.WhenAny(task, Task.Delay(timeout)) == task)
+                        {
+                            playerinfo = task.Result;
+                        }
+                        else
+                        {
+                            Player player = new Player();
+                            player.Name = "Cant fetch playerlist | Port closed";
+                            playerinfo.Add(player);
+                        }
+                    }
+
+
+                    foreach (Player player in playerinfo)
+                    {
+                        sb.AppendLine(player.Name + " | Playtime: " + player.TotalDurationAsString);
+                    }
+
+
+
+                    sb.AppendLine("");
+                    sb.AppendLine("");
+
                     MessageBox.Show(sb.ToString(), "Playerlist", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-
-              
-            }
+            });
+          //  return Task.CompletedTask;
         }
+            
 
         //private void metroButton1_Click(object sender, EventArgs e)
         //{

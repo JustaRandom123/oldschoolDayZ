@@ -17,8 +17,8 @@
     <Setting Name="steamToken" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="version" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">3.3</Value>
+    <Setting Name="version" Type="System.String" Scope="User">
+      <Value Profile="(Default)">3.4</Value>
     </Setting>
     <Setting Name="gamePath" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
