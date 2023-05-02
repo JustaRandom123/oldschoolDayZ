@@ -18,6 +18,9 @@ using Newtonsoft.Json.Linq;
 using MetroFramework.Controls;
 using SteamQueryNet;
 using SteamQueryNet.Models;
+using SteamKit2;
+using static SteamKit2.Internal.CMsgCellList;
+using SteamKit2.Discovery;
 
 namespace Oldschool_DayZ_Launcher
 {
@@ -53,25 +56,26 @@ namespace Oldschool_DayZ_Launcher
             Application.Exit();
         }
 
-        private void MainFrame_Load(object sender, EventArgs e)
+        private async void MainFrame_Load(object sender, EventArgs e)
         {
-            if (Settings.Default.version != wclient.DownloadString("http://185.223.31.43/Launcher/version"))
-            {
-                MessageBox.Show("New update available!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                Application.Exit();
-                Process.Start(Application.StartupPath + "\\updater.exe");
-                return;
-            }
+            //if (Settings.Default.version != wclient.DownloadString("http://185.223.31.43/Launcher/version"))
+            //{
+            //    MessageBox.Show("New update available!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //    Application.Exit();
+            //    Process.Start(Application.StartupPath + "\\updater.exe");
+            //    return;
+            //}
+        
 
             if (Settings.Default.steamToken == "")
-            {              
-                var content = Interaction.InputBox("Go to this site: https://steamcommunity.com/dev/apikey and copy/paste your steam token down below. If its asking for domain name type in 127.0.0.1", "Steam Token", "Enter your token here", -1, -1);               
+            {
+                var content = Interaction.InputBox("Go to this site: https://steamcommunity.com/dev/apikey and copy/paste your steam token down below. If its asking for domain name type in 127.0.0.1", "Steam Token", "Enter your token here", -1, -1);
                 if (content != null)
-                {             
+                {
                     Settings.Default.steamToken = content;
-                    Settings.Default.Save();                 
-                }             
-            }     
+                    Settings.Default.Save();
+                }
+            }
             listView1.MouseClick += listView1_MouseClick;
 
 
@@ -90,22 +94,24 @@ namespace Oldschool_DayZ_Launcher
                         this.Controls.Remove(settingsTab);
                         settingsState = false;
                       //  MessageBox.Show("Gamepath saved!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        gettingsFiles();
+                      //  gettingsFiles();
                     }
                 }           
             }
             else
             {
-                gettingsFiles();
+              //  gettingsFiles();
             }
 
 
-            // listView1.Visible = true;
-            // pictureBox2.Visible = true;
-            // pictureBox3.Visible = true; 
-            // serverLoader();
-          //  gettingsFiles();          
+            listView1.Visible = true;
+            pictureBox2.Visible = true;
+            pictureBox3.Visible = true;
+            serverLoader();
+            //  gettingsFiles();          
         }
+
+      
 
         private void listView1_MouseClick(object sender, MouseEventArgs e)
         {
@@ -402,22 +408,22 @@ namespace Oldschool_DayZ_Launcher
                 startParameter = startParameter.Replace("#ip#", ip);
                 Process.Start(Settings.Default.gamePath + "\\DayZ_x64.exe", startParameter);
             }
-            else
-            {
-                var result = MessageBox.Show("Cant find DayZ_x64.exe in your selected gamepath! Do you want to download dayz into '" + Settings.Default.gamePath + "'?", " Error", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-                if (result == DialogResult.Yes)
-                {
-                    listView1.Visible = false;
-                    metroLabel2.Visible = true;
-                    metroLabel1.Visible = true;
-                    metroLabel3.Visible = true;
-                    metroProgressBar1.Visible = true;
-                    metroLabel4.Visible = true;                 
-                    pictureBox2.Visible = false;
-                    pictureBox3.Visible = false;
-                    gettingsFiles();
-                }
-            }
+            //else
+            //{
+            //    var result = MessageBox.Show("Cant find DayZ_x64.exe in your selected gamepath! Do you want to download dayz into '" + Settings.Default.gamePath + "'?", " Error", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+            //    if (result == DialogResult.Yes)
+            //    {
+            //        listView1.Visible = false;
+            //        metroLabel2.Visible = true;
+            //        metroLabel1.Visible = true;
+            //        metroLabel3.Visible = true;
+            //        metroProgressBar1.Visible = true;
+            //        metroLabel4.Visible = true;                 
+            //        pictureBox2.Visible = false;
+            //        pictureBox3.Visible = false;
+            //        gettingsFiles();
+            //    }
+          //  }
         }
 
 
@@ -472,6 +478,13 @@ namespace Oldschool_DayZ_Launcher
 
         private void serverLoader()
         {
+            metroLabel2.Visible = false;
+            metroLabel1.Visible = false;
+            metroLabel3.Visible = false;
+            metroProgressBar1.Visible = false;
+            metroLabel4.Visible = false;
+
+
             try
             {
                 playersCountGeneral = 0;
